@@ -1,4 +1,6 @@
-import * as admin from 'firebase-admin';
+// import * as admin from 'firebase-admin';
+
+const admin = require('firebase-admin');
 
 const serviceAccount = require('../service-account.json');
 
@@ -6,9 +8,9 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-import { ApolloError, ValidationError } from 'apollo-server';
-import { GraphQLScalarType } from 'graphql';
-import { Kind } from 'graphql/language';
+const { ApolloError, ValidationError } = require('apollo-server');
+const { GraphQLScalarType } = require('graphql');
+const { Kind } = require('graphql/language');
 
 const resolvers = {
     Query: {

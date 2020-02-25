@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+const { gql } = require('apollo-server');
 
 const typeDefs = gql`
     scalar Date
@@ -7,7 +7,7 @@ const typeDefs = gql`
     type User {
         id: ID!
         email: String!
-        posts: [Posts]
+        posts: [Post]
     }
     # A Post Object
     type Post {
