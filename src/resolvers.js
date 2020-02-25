@@ -59,7 +59,43 @@ const resolvers = {
         } catch (error) {
           throw new ApolloError(error);
         }
+      },
+      async comments(post) {
+        try {
+            const postComments = await admin
+              .firestore()
+              .collection('Comments')
+              .where('postId', '==', post.id)
+              .get();
+            return postComments.docs.map(comment => comment.data());
+        } catch (error) {
+            throw new ApolloError(error);
+        }
       }
+    },
+    Comment: {
+        async user(comment) {
+          try {
+            const commentAuthor = await admin
+              .firestore()
+              .doc(`Users/${comment.userId}`)
+              .get();
+            return commentAuthor.data();
+          } catch (error) {
+            throw new ApolloError(error);
+          }
+        },
+        async post(comment) {
+            try {
+              const post = await admin
+                .firestore()
+                .doc(`Posts/${comment.postId}`)
+                .get();
+              return post.data();
+            } catch (error) {
+              throw new ApolloError(error);
+            }
+        },
     },
     Date: new GraphQLScalarType({
         name: 'Date',
