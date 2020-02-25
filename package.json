@@ -2,8 +2,9 @@
   "name": "Life-Guru",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "build": "tsc",
     "serve": "npm run build && node src/index.js",
     "start": "node src/index.js",
     "deploy": "npm run build && gcloud app deploy"
