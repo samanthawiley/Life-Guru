@@ -1,12 +1,46 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { render } from 'react-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
+import { gql } from 'apollo-boost';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const POSTS = gql`
+{
+    posts {
+        id
+      user {
+        id
+      }
+      createdAt
+    }
+}
+`;
+
+function Posts() {
+    const { loading, error, data } = useQuery(POSTS);
+  
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
+  
+    return data.posts.map(({ id, user }) => (
+      <div key={id}>
+        <p>
+          {id}: {user.id}
+        </p>
+      </div>
+    ));
+  }
+
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+});
+
+const App = () => (
+  <ApolloProvider client={client}>
+    <Posts />
+  </ApolloProvider>
+);
+
+render(<App />, document.getElementById('root'));
