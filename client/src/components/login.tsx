@@ -2,9 +2,8 @@ import React from 'react';
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-import { LoginForm, Loading } from '../components';
+import LoginForm from './login-form';
 import ApolloClient from 'apollo-client';
-import * as LoginTypes from './__generated__/login';
 
 export const LOGIN_USER = gql`
   mutation login($username: String!) {
@@ -14,7 +13,7 @@ export const LOGIN_USER = gql`
 
 export default function Login() {
   const client: ApolloClient<any> = useApolloClient();
-  const [login, { loading, error }] = useMutation<LoginTypes.login, LoginTypes.loginVariables>(
+  const [login, { loading, error }] = useMutation<{ login: string | null }, { username: string }>(
     LOGIN_USER,
     {
       onCompleted({ login }) {
@@ -24,7 +23,7 @@ export default function Login() {
     }
   );
 
-  if (loading) return <Loading />;
+  if (loading) return "Loading";
   if (error) return <p>An error occurred</p>;
 
   return <LoginForm login={login} />;

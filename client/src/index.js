@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 
@@ -37,6 +38,7 @@ import Login from './components/login';
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
+  cache,
   uri: 'http://localhost:4000/graphql',
 });
 
