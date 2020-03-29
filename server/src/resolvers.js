@@ -24,6 +24,20 @@ const resolvers = {
         }
       }
     },
+    Mutation: {
+      login: async (_, { id }) => {
+        try {
+          const userDoc = await admin
+            .firestore()
+            .doc(`Users/${id}`)
+            .get();
+          const user = userDoc.data();
+          return user.id || new ValidationError('User ID not found');
+        } catch (error) {
+          throw new ApolloError(error);
+        }
+      }
+    },
     User: {
       async posts(user) {
         try {

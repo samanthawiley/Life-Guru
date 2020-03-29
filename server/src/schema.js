@@ -33,7 +33,7 @@ const typeDefs = gql`
         user(id: String!): User
     }
     type Mutation {
-        login: (username: String!): String!
+        login: (id: String!): String!
         post: (text: String!): Boolean!
         comment: (post: Post!, text: String!): Boolean!
     }
