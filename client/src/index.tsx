@@ -8,6 +8,7 @@ import { gql } from 'apollo-boost';
 
 import Home from './components/home';
 import Login from './components/login';
+import { typeDefs } from './resolvers';
 
 // const POSTS = gql`
 // {
@@ -37,9 +38,10 @@ import Login from './components/login';
 //   }
 
 const cache = new InMemoryCache();
-const client = new ApolloClient({
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
   uri: 'http://localhost:4000/graphql',
+  typeDefs,
 });
 
 cache.writeData({

@@ -23,7 +23,7 @@ export default function Login() {
     }
   );
 
-  if (loading) return "Loading";
+  if (loading) return <p>Loading</p>;
   if (error) return <p>An error occurred</p>;
 
   return <LoginForm login={login} />;
