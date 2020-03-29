@@ -32,6 +32,12 @@ const typeDefs = gql`
         posts: [Post]
         user(id: String!): User
     }
+    type Mutation {
+        login: (username: String!): String!
+        post: (text: String!): Boolean!
+        comment: (post: Post!, text: String!): Boolean!
+    }
+
 `;
 
 module.exports = typeDefs;
