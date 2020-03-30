@@ -1,4 +1,6 @@
-import { Global } from '@emotion/core';
+// import { Global } from '@emotion/core';
+
+import { injectGlobal } from 'emotion'
 
 export const unit = 8;
 export const colors = {
@@ -11,7 +13,7 @@ export const colors = {
   textSecondary: '#747790'
 };
 
-export default () => Global({
+export default () => injectGlobal({
   [['html', 'body']]: {
     height: '100%',
   },

@@ -9,6 +9,7 @@ import { gql } from 'apollo-boost';
 import Home from './components/home';
 import Login from './components/login';
 import { typeDefs } from './resolvers';
+import injectStyles from './styles';
 
 // const POSTS = gql`
 // {
@@ -61,6 +62,7 @@ function IsLoggedIn() {
   return data.isLoggedIn ? <Home /> : <Login />;
 }
 
+injectStyles();
 const App = () => (
   <ApolloProvider client={client}>
     <IsLoggedIn />
