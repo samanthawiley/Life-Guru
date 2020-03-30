@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from '@emotion/styled'
 import { size } from 'polished';
 
 import { unit, colors } from '../styles';
 import lifeGuru from '../images/life-guru.png';
+import LogoutButton from './logout-button';
 
 interface HeaderProps {
   image?: string | any;
@@ -11,17 +12,20 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ image, children = 'Life Guru' }) => {
-//   const email = localStorage.getItem('token') as string;
+  const username = localStorage.getItem('token') as string;
   const avatar = image || lifeGuru;
 
   return (
-    <Container>
-      <Image round={!image} src={avatar} alt="Life guru" />
-      <div>
-        <h2>{children}</h2>
-        {/* <Subheading>{email}</Subheading> */}
-      </div>
-    </Container>
+    <Fragment>
+      <Container>
+        <Image round={!image} src={avatar} alt="Life guru" />
+        <div>
+          <h2>{children}</h2>
+          <Subheading>{username}</Subheading>
+        </div>
+        <LogoutButton />
+      </Container>
+    </Fragment>
   );
 }
 
