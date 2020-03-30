@@ -4,6 +4,7 @@ import { css } from 'emotion'
 import { size } from 'polished';
 
 import Button from './button';
+import lifeGuru from '../images/life-guru.png';
 // import { ReactComponent as Logo } from '../assets/logo.svg';
 // import { ReactComponent as Curve } from '../assets/curve.svg';
 // import { ReactComponent as Rocket } from '../assets/rocket.svg';
@@ -34,11 +35,12 @@ export default class LoginForm extends Component<LoginFormProps, LoginFormState>
     };
 
     render() {
+        const avatar = lifeGuru;
+
         return (
         <Container>
             <Header>
-            {/* <StyledCurve />
-            <StyledLogo /> */}
+              <Image round={true} src={avatar} alt="Life guru" />
             </Header>
             {/* <StyledRocket /> */}
             <Heading>Life Guru</Heading>
@@ -68,8 +70,7 @@ const Container = styled('div')({
   alignItems: 'center',
   flexGrow: 1,
   paddingBottom: unit * 6,
-  color: 'white',
-  backgroundColor: colors.primary,
+  backgroundColor: 'white',
   // backgroundImage: `url(${space})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
@@ -93,6 +94,13 @@ const Header = styled('header')(svgClassName, {
 //   position: 'relative',
 // });
 
+const Image = styled('img')(size(134), (props: { round: boolean }) => ({
+  display: 'block',
+  margin: '0 auto',
+  position: 'relative',
+  borderRadius: props.round ? '50%' : '0%',
+}));
+
 // const StyledCurve = styled(Curve)(size('100%'), {
 //   fill: colors.primary,
 //   position: 'absolute',
@@ -115,7 +123,7 @@ const StyledForm = styled('form')({
   borderRadius: 3,
   boxShadow: '6px 6px 1px rgba(0, 0, 0, 0.25)',
   color: colors.text,
-  backgroundColor: 'white',
+  backgroundColor: '#F1DEEE',
 });
 
 const StyledInput = styled('input')({
