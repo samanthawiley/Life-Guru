@@ -4,16 +4,17 @@ import gql from 'graphql-tag';
 
 import LoginForm from './login-form';
 import ApolloClient from 'apollo-client';
+import * as LoginTypes from './tiles/login';
 
 export const LOGIN_USER = gql`
-  mutation login($username: String!) {
-    login(username: $username)
+  mutation login($id: String!) {
+    login(id: $id)
   }
 `;
 
 export default function Login() {
   const client: ApolloClient<any> = useApolloClient();
-  const [login, { loading, error }] = useMutation<{ login: string | null }, { username: string }>(
+  const [login, { loading, error }] = useMutation<LoginTypes.login, LoginTypes.loginVariables>(
     LOGIN_USER,
     {
       onCompleted({ login }) {

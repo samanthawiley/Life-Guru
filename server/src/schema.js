@@ -33,9 +33,9 @@ const typeDefs = gql`
         user(id: String!): User
     }
     type Mutation {
-        login: (id: String!): String!
-        post: (text: String!): Boolean!
-        comment: (post: Post!, text: String!): Boolean!
+        login(id: String!): String!
+        # post: (text: String!): Boolean!
+        # comment: (post: Post!, text: String!): Boolean!
     }
 
 `;

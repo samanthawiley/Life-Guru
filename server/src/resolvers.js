@@ -1,6 +1,7 @@
 const { ApolloError, ValidationError } = require('apollo-server');
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
+const admin = require('./firebase');
 
 const resolvers = {
     Query: {
@@ -19,20 +20,6 @@ const resolvers = {
             .get();
           const user = userDoc.data();
           return user || new ValidationError('User ID not found');
-        } catch (error) {
-          throw new ApolloError(error);
-        }
-      }
-    },
-    Mutation: {
-      login: async (_, { id }) => {
-        try {
-          const userDoc = await admin
-            .firestore()
-            .doc(`Users/${id}`)
-            .get();
-          const user = userDoc.data();
-          return user.id || new ValidationError('User ID not found');
         } catch (error) {
           throw new ApolloError(error);
         }
@@ -117,6 +104,20 @@ const resolvers = {
         //   return null;
         // },
     }),
+    Mutation: {
+      login: async (_, { id }) => {
+        try {
+          const userDoc = await admin
+            .firestore()
+            .doc(`Users/${id}`)
+            .get();
+          const user = userDoc.data();
+          return user.id || new ValidationError('User ID not found');
+        } catch (error) {
+          throw new ApolloError(error);
+        }
+      }
+    },
   };
 
 module.exports = resolvers;

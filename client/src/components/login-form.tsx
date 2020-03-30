@@ -8,27 +8,29 @@ import Button from './button';
 // import { ReactComponent as Curve } from '../assets/curve.svg';
 // import { ReactComponent as Rocket } from '../assets/rocket.svg';
 import { colors, unit } from '../styles';
+import * as LoginTypes from './tiles/login';
+
 
 interface LoginFormProps {
-    login: (a: { variables: { username: string } }) => void;
+    login: (a: { variables: LoginTypes.loginVariables }) => void;
 }
   
 interface LoginFormState {
-    username: string;
+    id: string;
 }
   
 export default class LoginForm extends Component<LoginFormProps, LoginFormState> {
-    state = { username: '' };
+    state = { id: '' };
   
 
     onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const username = (event.target as HTMLInputElement).value;
-        this.setState(s => ({ username }));
+        const id = (event.target as HTMLInputElement).value;
+        this.setState(s => ({ id }));
     };
 
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        this.props.login({ variables: { username: this.state.username } });
+        this.props.login({ variables: { id: this.state.id } });
     };
 
     render() {
@@ -43,8 +45,8 @@ export default class LoginForm extends Component<LoginFormProps, LoginFormState>
             <StyledForm onSubmit={(e) => this.onSubmit(e)}>
             <StyledInput
                 required
-                type="username"
-                name="username"
+                type="id"
+                name="id"
                 placeholder="Username"
                 data-testid="login-input"
                 onChange={(e) => this.onChange(e)}
