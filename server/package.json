@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/samanthawiley/Life-Guru#readme",
   "dependencies": {
-    "apollo-server": "^2.10.1",
+    "apollo-server": "^2.25.4",
     "firebase-admin": "^8.9.2",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3"
